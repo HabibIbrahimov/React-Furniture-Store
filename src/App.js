@@ -1,9 +1,38 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { Navbar, Sidebar, Footer } from './components'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Navbar, Sidebar, Footer } from './components';
+import {
+  Home,
+  SingleProduct,
+  Cart,
+  Checkout,
+  About,
+  Error,
+  Products,
+  PrivateRoute,
+} from './pages';
 
 function App() {
-  return <h4>comfy sloth starter</h4>
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="products" element={<Products />} />
+        <Route path="products/:id" element={<SingleProduct />} />
+        <Route
+          path="checkout"
+          element={
+            <PrivateRoute>
+              <Checkout />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
